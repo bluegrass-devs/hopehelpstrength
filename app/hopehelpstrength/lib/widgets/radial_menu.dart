@@ -115,7 +115,7 @@ class RadialAnimation extends StatelessWidget {
     controller.reverse();
   }
 
-  _buildButton(double angle, { Color color, IconData icon }) {
+  _buildButton(double angle, { Color color, IconData icon , String path}) {
     final double rad = radians(angle);
     return Transform(
         transform: Matrix4.identity()..translate(
@@ -124,7 +124,12 @@ class RadialAnimation extends StatelessWidget {
         ),
 
         child: FloatingActionButton(
-            child: Icon(icon), backgroundColor: color, onPressed: _close, elevation: 0)
+            child: Icon(icon), backgroundColor: color, onPressed: _goToPath(path), elevation: 0)
     );
+  }
+
+  _goToPath(String path){
+    //TODO:  add functionality for navigating to a path
+    
   }
 }

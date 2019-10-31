@@ -48,10 +48,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String _lastSelected = 'TAB: 0';
+  int _index = 0;
 
   void _selectedTab(int index) {
     setState(() {
       _lastSelected = 'TAB: $index';
+      _index = index;
     });
   }
 
@@ -67,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SizedBox.expand(child: RadialMenu()),
+      body:_buildBody(context) ,
       bottomNavigationBar: FABBottomAppBar(
         centerItemText: 'A',
         color: Colors.grey,
@@ -84,6 +86,32 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: _buildFab(
           context), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget _buildBody(BuildContext context){
+    // TODO: add new indexes and switch to the index based on
+    return IndexedStack(
+      index: _index,
+      children: <Widget>[
+        SizedBox.expand(child: RadialMenu()),
+        Container(
+          alignment: Alignment.bottomLeft,
+          color: Colors.blue,
+          height: 300.0,
+          width: 300.0,
+        ),
+        Container(
+          color: Colors.pink,
+          height: 150.0,
+          width: 150.0,
+        ),
+        Container(
+          color: Colors.green,
+          height: 450.0,
+          width: 450.0,
+        )
+      ],
     );
   }
 
